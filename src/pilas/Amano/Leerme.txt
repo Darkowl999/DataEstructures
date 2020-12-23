@@ -1,0 +1,5 @@
+ACLARACIÓN:
+
+La idea fundamental de este paquete es implementar una pila desde cero junto a todos sus metodos
+sin necesidad de importar la coleccion "Stack" que nos brinda java, es decir que se implementaran
+todos los metodos comunes de una pila de manera manual.

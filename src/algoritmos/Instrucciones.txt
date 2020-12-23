@@ -1,0 +1,4 @@
+Basicamente este archivo trata sobre algoritmos sencillos, la finalidad no es otra sino la de
+practicar sintaxis en java y estandares de codificacion, los algoritmos presentados aquí son
+sencillos y practicos, a manera de ir calentando la logica conforme se avance con la complejidad de
+la programación.

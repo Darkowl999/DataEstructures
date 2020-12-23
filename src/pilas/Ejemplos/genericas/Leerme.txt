@@ -1,0 +1,5 @@
+ACLARACIÓN:
+
+La idea fundamental de este paquete es implementar una pila de manera generica
+solo por el gusto de codear y por que me dá la gana, de igual manera se implementaran
+todos los metodos basicos y pertenecientes a las pilas o Stacks.

@@ -1,0 +1,4 @@
+Aclaracion:
+
+Este paquete trata de mostrar diferentes ejemplos de como usar generics en java
+desde su implementacion y etc.
