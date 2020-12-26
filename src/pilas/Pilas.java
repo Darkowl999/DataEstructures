@@ -1,26 +1,30 @@
 package pilas;
 import java.util.Stack;
+/**
+ * Implementacion de pilas a traves de la libreria Stack
+ * **/
 public class Pilas {
+    /**
+     * Operaciones basicas que podemos hacer con pilas:
+     * PUSH: Añadir un elemento
+     * POP: es para sacar un elemento
+     * PEEK: revisa el tope o el elemento final de la pila
+     * EMPTY: Es para saber si la pila está o no vacia (es un boolean)
+     * ***/
+
     public static void main(String[] args) {
-        Stack<String> pila1= new Stack<String>();
-        System.out.println("EJEMPLO DE COMO SE USA ESTA LIBRERIA");
-        System.out.println("Insertando elementos en la pila");
-        pila1.push("elemento1");
-        pila1.push("elemento2");
-        pila1.push("elemento3");
-        pila1.push("elemento4");
-        pila1.push("elemento5");
-        System.out.println("Terminamos de insertar elementos");
-        System.out.println("----------------------------------");
-        System.out.println(pila1.peek());
-        System.out.println("Aca quito al elemento 5");
-        pila1.pop();
-        System.out.println("Este es el ultimo elemento");
-        System.out.println(pila1.peek());
-        System.out.println("fin del programa");
+        Stack pila = new Stack();
+        pila.push("Mundo");
+        pila.push("hola");
+        pila.push("jajajaj");
+        System.out.println(pila);
+        System.out.println(pila.peek());
+        pila.pop();
+        System.out.println(pila);
+        System.out.println(pila.peek());
+
     }
-    Stack<String> pila2 = new Stack<String>();
-    /****/
+
 }
 
 
