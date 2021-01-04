@@ -1,0 +1,3 @@
+todo: el paquete lista enlazada como tal es un ejemplo de como funcionan las listas
+esta hecho a mano sin usar ninguna libreria, obviamente con java no es necesario hacer esto
+pero es bueno saber como funciona internamente.
