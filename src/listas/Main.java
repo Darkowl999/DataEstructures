@@ -10,5 +10,10 @@ public class Main {
         segundo.enlazarSiguiente(tercer);
         primero.obtenerSiguiente();
         System.out.println(primero.obtenerSiguiente().valor);
+        ListaEnlazada nuevalista= new ListaEnlazada();
+        nuevalista.addPrimero("primer objeto");
+
+
     }
+
 }

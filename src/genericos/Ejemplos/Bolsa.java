@@ -1,11 +1,10 @@
 package genericos.Ejemplos;
 
-import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
-
 public class Bolsa <N,V>{
     N nombre;
     V valor;
     public Bolsa(N nombre,V valor){
+
        this.nombre=nombre;
         this.valor=valor;
     }

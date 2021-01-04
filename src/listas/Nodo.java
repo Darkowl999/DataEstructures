@@ -5,24 +5,27 @@ package listas;
  *  el enlace o siguiente -> es un enlace o punetero que enlaza al siguiente enlace
  * ***/
 public class Nodo {
-    Object valor;
-    Nodo siguiente= null;
+    Object valor; //este es el valor que almacenara el nodo
+    Nodo siguiente= null; //este es el enlace o puntero que conecta a otro nodo
 
-    public Nodo(Object valor){
+    public Nodo(Object valor){ //Constructor de oficio
         this.valor=valor;
         this.siguiente=null;
     }
     //Metodos
 
-    public Object obtenerValor(){
+    public Object obtenerValor(){//este metodo retorna el valor del nodo
+
         return valor;
     }
 
-    public void enlazarSiguiente(Nodo nodo){
+    public void enlazarSiguiente(Nodo nodo){ //Este método conecta a otro nodo
+
         siguiente=nodo;
     }
-    public Nodo obtenerSiguiente(){
+    public Nodo obtenerSiguiente() { //este método basicamente se encarga de mostrar el siguiente nodo que esta siendo apuntado.
         return siguiente;
+
     }
 
 
