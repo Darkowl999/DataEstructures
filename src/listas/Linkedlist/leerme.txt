@@ -1,0 +1,2 @@
+este paquete es igual la implementacion de una lista enlazada pero a diferencia de los otros metodos
+se usan las colecciones que tiene java para ahorrarnos el trabajo de inventar la rueda de nuevo de manera innecesaria.
