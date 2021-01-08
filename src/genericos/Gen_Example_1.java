@@ -5,6 +5,7 @@ public class Gen_Example_1 <T> {
     /** "T"  Es el parametro de tipo generico **/
     T objeto; // se declara un objeto de tipo T
 
+    //constructor de oficio//
     Gen_Example_1(T ob){ //Pase al constructor una referencia a un objeto de tipo T
         objeto=ob;
     }
@@ -28,7 +29,7 @@ public class Gen_Example_1 <T> {
 
             Gen_Example_1<Integer> iObj;
             //cree un Con el nombre Gen_Example_1<Integer> y asigne su referencia a la variable iObj.
-            //observe ahorael uso de autoboxing para encapslar el valor de 28 dentro de un objeto integer
+            //observe ahora el uso de autoboxing para encapsular el valor de 28 dentro de un objeto integer
             iObj= new Gen_Example_1<Integer>(28);
 
             //Llamo al metodo de la clase de arriba que lo que hará es mostrar el tipo de dato que estamos usando
