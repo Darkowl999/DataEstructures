@@ -1,0 +1,4 @@
+este paquete hace referencia basicamente a Binary search tree
+que es un arbol binario de busqueda.
+la idea fundamental de esto es implementar metodos propios y ejemplos hechos con codigo a mi manera
+espero sea entendible el codigo
