@@ -1,4 +1,8 @@
-package bst;
+package bst.binarytree;
+
+import bst.binarytree.BinaryTree;
+import bst.binarytree.Node;
+
 //clase donde llamaremos a la clase BinaryTree
 public class Main {
     public static void main(String[] args) {
@@ -23,7 +27,7 @@ public class Main {
         tree.root.left.left= new Node(4);
 
 
-
+        tree.printInorder(tree.root);
 
     }
 }

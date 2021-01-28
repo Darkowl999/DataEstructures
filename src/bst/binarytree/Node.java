@@ -1,4 +1,4 @@
-package bst;
+package bst.binarytree;
 //esta clase es la clase nodo que se ocupa comunmente en un arbol binario
 public class Node {
     int key;

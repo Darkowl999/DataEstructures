@@ -1,4 +1,7 @@
-package bst;
+package bst.binarytree;
+
+import bst.binarytree.Node;
+
 //esta es la clase arbol binario comun
 public class BinaryTree {
     Node root; //esta es la raiz del arbol binario

@@ -1,4 +1,8 @@
-package bst;
+package bst.binarytree;
+
+import bst.binarytree.BinaryTree;
+import bst.binarytree.Node;
+
 //esta clase mostrara los recorridos del arbol
 public class Main2 {
     public static void main(String[] args) {

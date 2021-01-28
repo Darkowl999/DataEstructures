@@ -1,0 +1,3 @@
+la idea de este paquete es mostrar el cruce de arbol binario de orden de nivel
+es decir:
+El recorrido por orden de nivel de un árbol es el primer recorrido en amplitud del árbol.
