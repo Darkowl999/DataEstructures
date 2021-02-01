@@ -4,13 +4,13 @@ import bst.binarytree.Node;
 
 //esta es la clase arbol binario comun
 public class BinaryTree {
-    Node root; //esta es la raiz del arbol binario
+    Node raiz; //esta es la raiz del arbol binario
     //constructores por defecto//
     BinaryTree(int llave){
-        root= new Node(llave);
+        raiz= new Node(llave);
     }
     BinaryTree(){
-        root=null;
+        raiz=null;
     }
     //Travesias o recorridos de un arbol (inorden, preorden, postorden)
 
@@ -18,25 +18,25 @@ public class BinaryTree {
         if(nodo==null)
             return;
         //hacemos el recorrido de post orden
-        printPostOrden(nodo.left);
+        printPostOrden(nodo.izquierda);
 
-        printPostOrden(nodo.right);
-        System.out.println(nodo.key+ " ");
+        printPostOrden(nodo.derecha);
+        System.out.println(nodo.llave+ " ");
     }
 
     void printInorder(Node nodo){
         if(nodo==null)
             return;
-        printInorder(nodo.left);
-        System.out.println(nodo.key+ " ");
-        printInorder(nodo.right);
+        printInorder(nodo.izquierda);
+        System.out.println(nodo.llave+ " ");
+        printInorder(nodo.derecha);
     }
     void printpreOrden(Node nodo){
         if(nodo==null)
             return;
-        System.out.println(nodo.key+" ");
-        printpreOrden(nodo.left);
-        printpreOrden(nodo.right);
+        System.out.println(nodo.llave+" ");
+        printpreOrden(nodo.izquierda);
+        printpreOrden(nodo.derecha);
 
     }
 

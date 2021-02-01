@@ -7,11 +7,12 @@ import bst.binarytree.Node;
 public class Main2 {
     public static void main(String[] args) {
         BinaryTree arbol= new BinaryTree();
-        arbol.root = new Node(1);
-        arbol.root.left = new Node(2);
-        arbol.root.right = new Node(3);
-        arbol.root.left.left = new Node(4);
-        arbol.root.right.right=new Node(5);
+        arbol.raiz = new Node(1);
+        arbol.raiz.izquierda = new Node(2);
+        arbol.raiz.derecha = new Node(3);
+        arbol.raiz.izquierda.izquierda = new Node(4);
+        arbol.raiz.izquierda.derecha=new Node(5);
+        arbol.printpreOrden(arbol.raiz);
 
     }
 }
