@@ -7,7 +7,7 @@ public class Gen_Example_1 <T> {
 
     //constructor de oficio//
     Gen_Example_1(T ob){ //Pase al constructor una referencia a un objeto de tipo T
-        objeto=ob;
+        this.objeto=ob;
     }
     T getObjeto(){
         return objeto;
