@@ -1,9 +1,12 @@
 package ed2_implementation;
 
+import arboles.arbolbinariobusqueda.Nodo;
+
 import java.util.*;
 
 public class ArbolBinarioBusqueda <K extends Comparable<K>,V> implements IArbolBusqueda<K,V>{
     protected  NodoBinario<K,V> raiz;
+
     //todo: estos metodos son de la interface
     @Override
     public void vaciar() {
@@ -36,14 +39,51 @@ public class ArbolBinarioBusqueda <K extends Comparable<K>,V> implements IArbolB
         }
         return cantidadDeNodos;
     }
-
-    @Override
-    public int altura() {
-        return 0;
+    //altura iterativa//
+    public int alturaI(){
+        if  (this.esArbolVacio()){
+            return 0;
+        }
+        int alturaDelArbol=0;
+        Queue<NodoBinario<K,V>> colaDeNodos= new LinkedList<>();
+        colaDeNodos.offer(this.raiz);
+        while (!colaDeNodos.isEmpty()) {
+            int cantidadDeNodosEnLaCola=colaDeNodos.size();
+            int i=0;
+            while (i <cantidadDeNodosEnLaCola) {
+                NodoBinario<K,V> nodoActual= colaDeNodos.poll();
+                if (!nodoActual.esVacioHijoIzquierdo()) {
+                    colaDeNodos.offer(nodoActual.getHijoIzquierdo());
+                }
+                if (!nodoActual.esVacioHijoDerecho()) {
+                    colaDeNodos.offer(nodoActual.getHijoDerecho());
+                }
+                i++;
+            }
+            alturaDelArbol++;
+        }
+        return alturaDelArbol;
     }
 
     @Override
-    public int nivel() {
+    public int altura() {
+        return altura(this.raiz);
+    }
+
+    private int altura(NodoBinario<K,V> nodoActual) {//metodo amigo que ayuda al metodo altura
+        if (NodoBinario.esNodoVacio(nodoActual)){
+            return 0;
+        }
+        int alturaPorIzquierda= altura(nodoActual.getHijoIzquierdo());
+        int alturaPorDerecha= altura(nodoActual.getHijoDerecho());
+        if(alturaPorIzquierda>alturaPorDerecha){
+            return alturaPorIzquierda+1;
+        }
+        return alturaPorDerecha+1;
+    }
+
+    @Override
+    public int nivel() { //el nivel es lo mismo que por altura la unica diferencia es que se retorna -1;
         return 0;
     }
 
@@ -53,7 +93,7 @@ public class ArbolBinarioBusqueda <K extends Comparable<K>,V> implements IArbolB
             return null;
         }
        NodoBinario<K,V> nodoActual=this.raiz;
-       NodoBinario<K,V> nodoAnterior= (NodoBinario<K, V>) NodoBinario.nodoVacio();
+       NodoBinario<K,V> nodoAnterior= (NodoBinario<K,V>) NodoBinario.nodoVacio();
        while (!NodoBinario.esNodoVacio(nodoActual)){
            nodoAnterior=nodoActual;
            nodoActual=nodoActual.getHijoIzquierdo();
@@ -150,10 +190,25 @@ public class ArbolBinarioBusqueda <K extends Comparable<K>,V> implements IArbolB
         //en el arbol
         return null;
     }
+    //TODO: HACER LOS RECORRIDOS EN MODO RECURSIVOS
 
     @Override
-    public List<K> recorridoEnInOrden() {
-        return null;
+    public List<K> recorridoEnInOrden() { //recorrido en inorden recursivo
+        List<K> recorrido= new ArrayList<>();
+        //para una implementacion recursiva se necesita un metodo compañero o amigo
+        //que haga el grueso del trabajo
+        recorridoEnInOrden(this.raiz,recorrido);
+        return recorrido;
+    }
+//Este es el metodo amigo recursivo del recorrido//
+    private void recorridoEnInOrden(NodoBinario<K,V> nodoActual, List<K> recorrido) {
+        //simulamos el n para un caso base
+        if (NodoBinario.esNodoVacio(nodoActual)){//es como decir n igual a cero
+            return;
+        }
+        recorridoEnInOrden(nodoActual.getHijoIzquierdo(),recorrido);
+        recorrido.add(nodoActual.getClave());
+        recorridoEnInOrden(nodoActual.getHijoDerecho(),recorrido);
     }
 
     @Override
@@ -180,8 +235,44 @@ public class ArbolBinarioBusqueda <K extends Comparable<K>,V> implements IArbolB
 
     @Override
     public List<K> recorridoEnPostOrden() {
-        return null;
+        List<K> recorrido= new ArrayList<>();
+        if (this.esArbolVacio()){
+            return recorrido;
+        }
+        Stack<NodoBinario<K,V>> piladeNodos= new Stack<>();
+        NodoBinario<K,V> nodoActual=this.raiz;
+        //el proceso inicial antes de iterar en la pila
+        meterPilaParaPostOrden(piladeNodos, nodoActual);
+        //empezamos a iterar sobre la pila
+        while (!piladeNodos.isEmpty()){
+            nodoActual= piladeNodos.pop();
+            recorrido.add(nodoActual.getClave());
+            if (!piladeNodos.isEmpty()){
+                NodoBinario<K,V> nodoDelTope= piladeNodos.peek();
+                if (!nodoDelTope.esVacioHijoDerecho()&&nodoDelTope.getHijoDerecho()!=nodoActual){
+                    //volver a hacer el mismo bucle de arriba
+                    meterPilaParaPostOrden(piladeNodos,nodoDelTope.getHijoDerecho());
+                    
+                }
+            }
+
+        }
+        return recorrido;
     }
+//este metodo se lo extrajo del bucle while para hacer un recorrido
+    private void meterPilaParaPostOrden(Stack<NodoBinario<K, V>> piladeNodos, NodoBinario<K, V> nodoActual) {
+        while (!NodoBinario.esNodoVacio(nodoActual)){
+            piladeNodos.push(nodoActual);
+            if (!nodoActual.esVacioHijoIzquierdo()){
+                nodoActual = nodoActual.getHijoIzquierdo();
+            }else{
+                nodoActual = nodoActual.getHijoDerecho();
+            }
+
+        }
+    }
+//hacer reconstruir por Preorden es decir hacer ese método
+//
 
     @Override
     public List<K> recorridoPorNiveles() { //recorrido por niveles se usa cola
@@ -203,4 +294,35 @@ public class ArbolBinarioBusqueda <K extends Comparable<K>,V> implements IArbolB
         }
         return recorrido;
     }
+
+    //otros metodos de la clase//
+    //se va a implementar un metodo que retorne si un arbol binario tiene nodos completos, es decir
+    //nodos que tengan sus dos hijos diferentes de vacio en el nivel n//
+
+    public  boolean tieneNodosCompletosEnNivel(int nivelObjetivo){
+        return tieneNodosCompletosEnNivel(this.raiz,nivelObjetivo,0);
+
+    }
+
+    private boolean tieneNodosCompletosEnNivel(NodoBinario<K,V> nodoActual, int nivelObjetivo, int nivelActual) {
+        if (NodoBinario.esNodoVacio(nodoActual)){
+            return true;
+        }
+
+        if (nivelActual== nivelObjetivo){
+         return !nodoActual.esVacioHijoIzquierdo()&& !nodoActual.esVacioHijoDerecho();
+        }
+        boolean completoPorIzquierda=this.tieneNodosCompletosEnNivel(nodoActual.getHijoIzquierdo(),
+                nivelObjetivo,nivelActual+1);
+        boolean completoPorDerecha=this.tieneNodosCompletosEnNivel(nodoActual.getHijoDerecho(),
+                nivelObjetivo,nivelActual+1);
+        return completoPorIzquierda && completoPorDerecha;
+
+    }
+
+
+
+
+
+
 }
