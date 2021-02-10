@@ -156,10 +156,77 @@ public class ArbolBinarioBusqueda <K extends Comparable<K>,V> implements IArbolB
 
 
     }
-
+//Métodos a eliminar //
+    /*
+    * se toma en cuenta 3 casos para eliminar
+    * caso1: Cuando es un nodo hoja es decir sin hijos se lo elimina directamente
+    * caso2: Cuando es un nodo que tiene un solo hijo se lo reemplaza por uno de sus hijos
+    * caso3: cuando tiene ambos hijos, buscar su sucesor inorden
+    * */
     @Override
-    public V eliminar(K clave) {
-        return null;
+    public V eliminar(K claveAEliminar) {
+        if (claveAEliminar==null){
+            throw new IllegalArgumentException("la clave a eliminar no puede ser nula");
+        }
+        V valorARetornar= this.buscar(claveAEliminar);
+        if (valorARetornar==null){
+            throw new IllegalArgumentException("La clave no existe en el árbol");
+        }
+        this.raiz= eliminar(this.raiz, claveAEliminar);
+
+        return valorARetornar;
+    }
+
+    //metodo amigo que ayudara al metodo de arriba//
+    private NodoBinario<K,V> eliminar(NodoBinario<K,V> nodoActual, K claveAEliminar) {
+        K claveActual= nodoActual.getClave();
+        if (claveAEliminar.compareTo(claveActual)>0){//si la clave a eliminar es mayor está por la rama derecha
+            NodoBinario<K,V> posibleNuevoHijoDerecho= eliminar(nodoActual.getHijoDerecho(),claveAEliminar);
+            nodoActual.setHijoDerecho(posibleNuevoHijoDerecho);
+            return nodoActual;
+        }
+        if (claveAEliminar.compareTo(claveActual)>0){//si la clave a eliminar es mayor está por la rama izquierda
+            NodoBinario<K,V> posibleNuevoHijoIzquierdo= eliminar(nodoActual.getHijoIzquierdo(),claveAEliminar);
+            nodoActual.setHijoIzquierdo(posibleNuevoHijoIzquierdo);
+            return nodoActual;
+        }
+        //si llego a este punto quiere decir que ya lo encontré el nodo con la clave que quiero eliminar
+        //caso 1
+        if (nodoActual.esHoja()){//en el caso de que sea hoja
+            return (NodoBinario<K, V>) NodoBinario.nodoVacio();//simple cast
+        }
+        //caso 2
+        //caso 2.1 -> solo tiene hijo izquierdo
+        if (!nodoActual.esVacioHijoIzquierdo()&& nodoActual.esVacioHijoDerecho()){
+            return nodoActual.getHijoIzquierdo();
+        }
+        //caso 2.2 -> solo tiene hijo derecho
+        if (!nodoActual.esVacioHijoDerecho()&& nodoActual.esVacioHijoIzquierdo()){
+            return nodoActual.getHijoDerecho();
+        }
+        //caso 3 -> cuando tiene 2 hijos
+        NodoBinario<K,V> nodoReemplazo= this.buscarNodoSucesor(nodoActual.getHijoDerecho());
+
+        NodoBinario<K,V> posibleNuevoHijoDerecho=eliminar(nodoActual.getHijoDerecho(),nodoReemplazo.getClave());
+
+        nodoActual.setHijoDerecho(posibleNuevoHijoDerecho);
+
+        nodoActual.setClave(nodoReemplazo.getClave());
+
+        nodoActual.setValor(nodoReemplazo.getValor());
+
+
+        return nodoActual;
+
+    }
+    //este metodo sucesor es metodo amigo y la idea del sucesor es bajar solo por la izquierda
+    protected NodoBinario<K,V> buscarNodoSucesor(NodoBinario<K,V> nodoActual) {
+        NodoBinario<K,V> nodoAnterior= nodoActual;
+        while (!NodoBinario.esNodoVacio(nodoActual)){//puedo hacerlo este recorrido con un do while
+            nodoAnterior=nodoActual;
+            nodoActual=nodoActual.getHijoIzquierdo();
+        }
+        return nodoAnterior;
     }
 
     @Override
@@ -319,10 +386,5 @@ public class ArbolBinarioBusqueda <K extends Comparable<K>,V> implements IArbolB
         return completoPorIzquierda && completoPorDerecha;
 
     }
-
-
-
-
-
 
 }
