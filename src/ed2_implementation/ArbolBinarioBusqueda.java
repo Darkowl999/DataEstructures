@@ -70,7 +70,7 @@ public class ArbolBinarioBusqueda <K extends Comparable<K>,V> implements IArbolB
         return altura(this.raiz);
     }
 
-    private int altura(NodoBinario<K,V> nodoActual) {//metodo amigo que ayuda al metodo altura
+    public int altura(NodoBinario<K, V> nodoActual) {//metodo amigo que ayuda al metodo altura
         if (NodoBinario.esNodoVacio(nodoActual)){
             return 0;
         }
